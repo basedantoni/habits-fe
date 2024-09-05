@@ -1,7 +1,7 @@
 import { indexHabits } from "@/api/habits";
 import { Habit } from "@/types";
 import { useQuery } from "@tanstack/react-query";
-import CreateHabit from "./create-habit";
+import CreateHabitButton from "./create-habit-button";
 import HabitCard from "./habit-card";
 
 const Habits = () => {
@@ -9,16 +9,12 @@ const Habits = () => {
   const query = useQuery({ queryKey: ["habits"], queryFn: indexHabits });
 
   return (
-    <div className="container flex flex-col items-center">
-      <CreateHabit />
-      <div className="w-full flex flex-wrap gap-4">
+    <div className="flex flex-col items-center">
+      <div className="w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {query.data?.map((habit: Habit) => (
-          <HabitCard
-            key={`habit_${habit.id}`}
-            title={habit.title}
-            id={habit.id}
-          />
+          <HabitCard key={`habit_${habit.id}`} {...habit} />
         ))}
+        <CreateHabitButton />
       </div>
     </div>
   );

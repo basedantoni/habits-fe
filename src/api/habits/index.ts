@@ -32,7 +32,6 @@ export const updateHabit = async ({
 };
 
 export const deleteHabit = async ({ id }: { id: string }) => {
-  console.log(id);
   const response = await client.delete(`/v1/habits/${id}`);
   return response.data;
 };

@@ -65,3 +65,5 @@ privatePackages/store
 storage
 yarn.lock
 .env
+
+habits.db

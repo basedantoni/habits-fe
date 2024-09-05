@@ -1,42 +1,36 @@
-import { Input } from "@/components/ui/input";
 import { Button } from "./ui/button";
+import { Trash2 } from "lucide-react";
+import { deleteHabit } from "@/api/habits";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createHabit } from "@/api/habits";
-import { useState } from "react";
 
-const CreateHabit = () => {
+const DeleteHabitButton = ({ id }: { id: string }) => {
   const queryClient = useQueryClient();
 
   // Mutations
+  // TODO: redirect to habits list
   const mutation = useMutation({
-    mutationFn: createHabit,
+    mutationFn: deleteHabit,
     onSuccess: () => {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["habits"] });
     },
   });
 
-  const [title, setTitle] = useState<string>("");
-
   return (
     <>
-      <Input
-        type="text"
-        placeholder="title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
       <Button
         onClick={() => {
           mutation.mutate({
-            params: { title },
+            id,
           });
         }}
+        variant="destructive"
+        size="icon"
       >
-        Submit
+        <Trash2 className="h-4 w-4" />
       </Button>
     </>
   );
 };
 
-export default CreateHabit;
+export default DeleteHabitButton;
