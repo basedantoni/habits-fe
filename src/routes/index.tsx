@@ -13,7 +13,8 @@ export const Route = createFileRoute("/")({
 });
 
 const handleGoogleLogin = () => {
-  window.location.href = "http://localhost:8080/auth/google";
+  console.log(import.meta.env.VITE_API_ENDPOINT);
+  window.location.href = `${import.meta.env.VITE_API_ENDPOINT}/auth/google`;
 };
 
 function Index() {

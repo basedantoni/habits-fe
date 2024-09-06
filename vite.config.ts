@@ -11,4 +11,10 @@ export default defineConfig({
     },
   },
   plugins: [react(), TanStackRouterVite()],
+  envPrefix: "VITE_",
+  server: {
+    host: true,
+    strictPort: true,
+    port: 3000,
+  },
 });

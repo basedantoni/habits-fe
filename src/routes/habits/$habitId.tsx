@@ -141,7 +141,7 @@ function Habit() {
         />
         <div className="flex flex-col gap-2">
           {initYearArray(getYear(habit.createdAt)).map((year) => (
-            <Link from={Route.fullPath} search={{ year }}>
+            <Link key={year} from={Route.fullPath} search={{ year }}>
               {year}
             </Link>
           ))}

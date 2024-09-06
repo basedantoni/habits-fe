@@ -1,8 +1,5 @@
 import axios from "axios";
 
-const token = localStorage.getItem("token");
-console.log(token);
-
 export const api = axios.create({
   baseURL: `${import.meta.env.VITE_API_ENDPOINT}`,
   headers: {
