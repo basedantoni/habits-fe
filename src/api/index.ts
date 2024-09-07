@@ -1,5 +1,5 @@
 import { notFound } from "@tanstack/react-router";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 
 export const client = axios.create({
   baseURL: `${import.meta.env.VITE_API_ENDPOINT}`,
