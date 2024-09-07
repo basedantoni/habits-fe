@@ -14,7 +14,7 @@ export const Route = createFileRoute("/login/")({
   },
   component: () => (
     <div className="flex flex-col items-center justify-center text-center gap-8">
-      <h1 className="text-4xl font-bold">Welcome to Better Habits</h1>
+      <h1 className="text-4xl font-bold">Login to Track Habits</h1>
       <Button
         className="flex justify-center gap-2 px-16"
         onClick={handleGoogleLogin}

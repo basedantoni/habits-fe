@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRef, useState } from "react";
@@ -61,7 +63,7 @@ const CreateContributionButton = ({ habitId }: CreateContributionProps) => {
             <Plus className="h-4 w-4 stroke-zinc-500" />
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="max-w-[300px] sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Log Time</DialogTitle>
             <DialogDescription>
