@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRef, useState } from "react";
-import { Pencil } from "lucide-react";
+import { Plus } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -14,6 +14,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { TimePickerInput } from "@/components/time-picker-input";
 import { createContribution } from "@/api/contributions";
+import { toast } from "sonner";
 
 type CreateContributionProps = {
   habitId: string;
@@ -27,7 +28,8 @@ const CreateContributionButton = ({ habitId }: CreateContributionProps) => {
     mutationFn: createContribution,
     onSuccess: () => {
       // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ["habits", habitId] });
+      queryClient.invalidateQueries({ queryKey: ["contributions", habitId] });
+      toast("Contribution Logged");
     },
   });
 
@@ -56,7 +58,7 @@ const CreateContributionButton = ({ habitId }: CreateContributionProps) => {
       <Dialog>
         <DialogTrigger asChild>
           <Button className="w-10 h-10" variant="outline" size="icon">
-            <Pencil className="h-4 w-4 stroke-zinc-500" />
+            <Plus className="h-4 w-4 stroke-zinc-500" />
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">

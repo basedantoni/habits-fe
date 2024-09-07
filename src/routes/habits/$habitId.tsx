@@ -117,13 +117,13 @@ function Habit() {
   };
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex items-center gap-4">
+    <div className="flex flex-col sm:items-center gap-6">
+      <div className="flex gap-4">
         <h1 className="text-2xl font-bold">{habit.title}</h1>
         <DeleteHabitButton id={habitId} />
         <CreateContributionButton habitId={habitId} />
       </div>
-      <div className="flex gap-4">
+      <div className="flex flex-col lg:flex-row gap-4">
         <ActivityCalendar
           data={contributionData}
           theme={explicitTheme}

@@ -29,10 +29,25 @@ const CreateHabitButton = () => {
   });
 
   const [title, setTitle] = useState<string>("");
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    mutation.mutate({
+      params: { title },
+    });
+    setTitle("");
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleClick();
+      setOpen(false);
+    }
+  };
 
   return (
     <>
-      <Dialog>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button className="w-full h-52" variant="outline" size="icon">
             <PlusCircle className="h-16 w-16" />
@@ -43,27 +58,21 @@ const CreateHabitButton = () => {
             <DialogTitle>Add Habit</DialogTitle>
             <DialogDescription>Add a new habit to your list.</DialogDescription>
           </DialogHeader>
-          <div className="grid gap-4 py-4 overflow-visible">
-            <div className="grid grid-cols-4 items-center gap-4 overflow-visible">
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
               <Input
                 id="title"
                 placeholder="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 className="col-span-3"
+                onKeyDown={handleKeyDown}
               />
             </div>
           </div>
           <DialogFooter>
             <DialogTrigger asChild>
-              <Button
-                type="submit"
-                onClick={() => {
-                  mutation.mutate({
-                    params: { title },
-                  });
-                }}
-              >
+              <Button type="submit" onClick={handleClick}>
                 Save changes
               </Button>
             </DialogTrigger>
