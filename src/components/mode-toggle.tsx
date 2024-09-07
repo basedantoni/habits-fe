@@ -8,9 +8,17 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useTheme } from "@/components/theme-provider";
+import { useNavigate } from "@tanstack/react-router";
 
 export function ModeToggle() {
   const { setTheme } = useTheme();
+  const navigate = useNavigate();
+
+  const handleClick = (theme: any) => {
+    setTheme(theme);
+
+    navigate({ to: "/" });
+  };
 
   return (
     <DropdownMenu>
@@ -22,13 +30,13 @@ export function ModeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+        <DropdownMenuItem onClick={() => handleClick("light")}>
           Light
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem onClick={() => handleClick("dark")}>
           Dark
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
+        <DropdownMenuItem onClick={() => handleClick("system")}>
           System
         </DropdownMenuItem>
       </DropdownMenuContent>

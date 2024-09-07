@@ -1,5 +1,10 @@
-import { Button } from "@/components/ui/button";
-import { createFileRoute, Router } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Navigate,
+  redirect,
+  Router,
+  useNavigate,
+} from "@tanstack/react-router";
 import { useEffect } from "react";
 import { z } from "zod";
 
@@ -8,36 +13,41 @@ const indexSearchSchema = z.object({
 });
 
 export const Route = createFileRoute("/")({
+  beforeLoad: async ({ location }) => {
+    // set theme
+    if (!localStorage.getItem("vite-ui-theme")) {
+      throw redirect({
+        to: "/settings",
+        search: {
+          redirect: location.href,
+        },
+      });
+    }
+  },
   component: Index,
   validateSearch: indexSearchSchema,
 });
 
-const handleGoogleLogin = () => {
-  console.log(import.meta.env.VITE_API_ENDPOINT);
-  window.location.href = `${import.meta.env.VITE_API_ENDPOINT}/auth/google`;
-};
-
 function Index() {
   const router = Router;
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Extract token from URL
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("token");
-
+    console.log("TOKEN", token);
     if (token) {
       // Store token in local storage
       localStorage.setItem("token", token);
 
       // Optionally, remove the token from the URL
-      // window.history.replaceState({}, document.title, window.location.pathname);
+      window.history.replaceState({}, document.title, window.location.pathname);
+    } else {
+      console.log("SHOULD REDIRECT");
+      navigate({ to: "/login" });
     }
   }, [router]);
 
-  return (
-    <div className="p-2">
-      <h3>Welcome Home!</h3>
-      <Button onClick={handleGoogleLogin}>Google Login</Button>
-    </div>
-  );
+  return <div className="flex flex-col items-center">HOME</div>;
 }

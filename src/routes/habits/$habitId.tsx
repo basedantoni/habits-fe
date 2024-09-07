@@ -14,6 +14,7 @@ import { z } from "zod";
 import { useTheme } from "@/components/theme-provider";
 import DeleteHabitButton from "@/components/delete-habit-button";
 import CreateContributionButton from "@/components/create-contribution-button";
+import { NotFound } from "@/components/not-found";
 
 const contributionSearchSchema = z.object({
   year: z
@@ -39,6 +40,7 @@ export const Route = createFileRoute("/habits/$habitId")({
       queryFn: () => showHabit(params.habitId),
     }),
   component: Habit,
+  notFoundComponent: NotFound,
 });
 
 function Habit() {

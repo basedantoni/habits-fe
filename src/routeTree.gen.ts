@@ -12,6 +12,8 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as SettingsIndexImport } from './routes/settings/index'
+import { Route as LoginIndexImport } from './routes/login/index'
 import { Route as HabitsIndexImport } from './routes/habits/index'
 import { Route as HabitsHabitIdImport } from './routes/habits/$habitId'
 
@@ -19,6 +21,16 @@ import { Route as HabitsHabitIdImport } from './routes/habits/$habitId'
 
 const IndexRoute = IndexImport.update({
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SettingsIndexRoute = SettingsIndexImport.update({
+  path: '/settings/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LoginIndexRoute = LoginIndexImport.update({
+  path: '/login/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -57,6 +69,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HabitsIndexImport
       parentRoute: typeof rootRoute
     }
+    '/login/': {
+      id: '/login/'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/settings/': {
+      id: '/settings/'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -66,6 +92,8 @@ export const routeTree = rootRoute.addChildren({
   IndexRoute,
   HabitsHabitIdRoute,
   HabitsIndexRoute,
+  LoginIndexRoute,
+  SettingsIndexRoute,
 })
 
 /* prettier-ignore-end */
@@ -78,7 +106,9 @@ export const routeTree = rootRoute.addChildren({
       "children": [
         "/",
         "/habits/$habitId",
-        "/habits/"
+        "/habits/",
+        "/login/",
+        "/settings/"
       ]
     },
     "/": {
@@ -89,6 +119,12 @@ export const routeTree = rootRoute.addChildren({
     },
     "/habits/": {
       "filePath": "habits/index.tsx"
+    },
+    "/login/": {
+      "filePath": "login/index.tsx"
+    },
+    "/settings/": {
+      "filePath": "settings/index.tsx"
     }
   }
 }

@@ -13,6 +13,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { toast } from "sonner";
 
 const CreateHabitButton = () => {
   const queryClient = useQueryClient();
@@ -23,6 +24,7 @@ const CreateHabitButton = () => {
     onSuccess: () => {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["habits"] });
+      toast("Habit Created");
     },
   });
 
@@ -36,13 +38,13 @@ const CreateHabitButton = () => {
             <PlusCircle className="h-16 w-16" />
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="max-w-[300px] sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Add Habit</DialogTitle>
             <DialogDescription>Add a new habit to your list.</DialogDescription>
           </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
+          <div className="grid gap-4 py-4 overflow-visible">
+            <div className="grid grid-cols-4 items-center gap-4 overflow-visible">
               <Input
                 id="title"
                 placeholder="title"

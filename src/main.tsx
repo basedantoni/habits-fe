@@ -10,9 +10,15 @@ const queryClient = new QueryClient();
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
+import { NotFound } from "./components/not-found";
 
 // Create a new router instance
-const router = createRouter({ routeTree, context: { queryClient } });
+const router = createRouter({
+  routeTree,
+  context: { queryClient },
+  defaultNotFoundComponent: NotFound,
+  notFoundMode: "root",
+});
 
 // Register the router instance for type safety
 declare module "@tanstack/react-router" {
@@ -30,7 +36,9 @@ if (!rootElement.innerHTML) {
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />
-          <ReactQueryDevtools initialIsOpen={false} />
+          {import.meta.env.VITE_NODE_ENV == "dev" && (
+            <ReactQueryDevtools initialIsOpen={false} />
+          )}
         </QueryClientProvider>
       </ThemeProvider>
     </StrictMode>

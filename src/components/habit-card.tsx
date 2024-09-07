@@ -81,11 +81,12 @@ const HabitCard = ({ title, id, streak, updatedAt }: Habit) => {
 
   return (
     <Link
+      className="transform transition-transform duration-300 hover:-translate-y-1 hover:translate-x-0.5"
       to="/habits/$habitId"
       params={{ habitId: id }}
       search={{ year: 2024 }}
     >
-      <Card className="overflow-hidden min-w-56 w-full transform transition-transform duration-300 hover:-translate-y-1 hover:translate-x-0.5">
+      <Card className="overflow-hidden min-w-56 w-full">
         <CardHeader>
           <CardTitle>{title}</CardTitle>
         </CardHeader>
