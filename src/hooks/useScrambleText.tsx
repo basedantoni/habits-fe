@@ -18,14 +18,14 @@ const useScrambleText = ({ title, animationDelay, paused, once }: Props) => {
 
   const possibleLetters = "!@#$%^&*()_=+[{]}|;:<>?/";
 
-  function getRandomColor() {
-    var letters = "0123456789ABCDEF";
-    var color = "#";
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
+  // function getRandomColor() {
+  //   var letters = "0123456789ABCDEF";
+  //   var color = "#";
+  //   for (var i = 0; i < 6; i++) {
+  //     color += letters[Math.floor(Math.random() * 16)];
+  //   }
+  //   return color;
+  // }
 
   useEffect(() => {
     if (paused) return;
@@ -35,7 +35,7 @@ const useScrambleText = ({ title, animationDelay, paused, once }: Props) => {
     const scrambleDuration = 400; // Duration for which each letter scrambles before settling
     const start = Date.now();
     const interval = setInterval(() => {
-      setLetters((currentLetters) => {
+      setLetters(() => {
         const timeElapsed = Date.now() - start;
 
         const newLetters = title.split("").map((finalLetter, index) => {
