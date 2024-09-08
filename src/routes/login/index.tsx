@@ -26,7 +26,7 @@ function Login() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center text-center gap-8">
+    <div className="flex flex-col items-center justify-center text-center gap-8 pt-16">
       <h1 className="text-4xl font-bold">Login to Track Habits</h1>
       <Button
         className="flex justify-center gap-2 px-16"
