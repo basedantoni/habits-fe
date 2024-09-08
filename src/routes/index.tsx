@@ -4,13 +4,14 @@ import {
   createFileRoute,
   Link,
   redirect,
-  Router,
+  useNavigate,
 } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { z } from "zod";
 
 const indexSearchSchema = z.object({
   token: z.string().optional(),
+  redirect: z.string().optional(),
 });
 
 export const Route = createFileRoute("/")({
@@ -30,7 +31,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const router = Router;
+  const navigate = useNavigate();
 
   const antFlicker = useFlickerOpacity({
     phrase: "ANT",
@@ -62,14 +63,18 @@ function Index() {
     // Extract token from URL
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("token");
+    const redirect = urlParams.get("redirect") || "/";
+
     if (token) {
       // Store token in local storage
       localStorage.setItem("token", token);
 
       // Optionally, remove the token from the URL
       window.history.replaceState({}, document.title, window.location.pathname);
+      // Redirect to the original destination
+      navigate({ to: redirect });
     }
-  }, [router]);
+  }, [navigate]);
 
   return (
     <div className="flex-grow flex flex-col h-full justify-between">
@@ -93,8 +98,12 @@ function Index() {
           </span>
         ))}
       </div>
-      <Link to="/habits" className="text-sm hover:underline">
+      <Link
+        to="/habits"
+        className="flex gap-1 items-center text-sm hover:underline"
+      >
         {habitsLinkScambled}
+        <div className="bg-zinc-950 dark:bg-white h-1.5 w-1.5 rounded-full animate-pulse"></div>
       </Link>
       <a
         className="text-sm text-zinc-600 hover:underline"
