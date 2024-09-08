@@ -1,4 +1,4 @@
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 import { deleteHabit } from "@/api/habits";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

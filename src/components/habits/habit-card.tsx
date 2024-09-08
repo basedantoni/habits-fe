@@ -2,7 +2,7 @@ import ActivityCalendar, {
   Activity,
   ThemeInput,
 } from "react-activity-calendar";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tooltip as MuiTooltip } from "@mui/material";
 import { Link } from "@tanstack/react-router";
 import { Calendar, Flame } from "lucide-react";

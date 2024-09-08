@@ -1,6 +1,6 @@
 import { indexHabits } from "@/api/habits";
-import CreateHabitButton from "@/components/create-habit-button";
-import HabitCard from "@/components/habit-card";
+import CreateHabitButton from "@/components/habits/create-habit-button";
+import HabitCard from "@/components/habits/habit-card";
 import { isAuthenticated } from "@/lib/auth";
 import { Habit } from "@/types";
 import { useQuery } from "@tanstack/react-query";

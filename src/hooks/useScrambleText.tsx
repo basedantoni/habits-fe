@@ -56,6 +56,7 @@ const useScrambleText = ({ title, animationDelay, paused, once }: Props) => {
                 style={{
                   color: "#c3c3c3",
                 }}
+                key={index}
               >
                 {
                   possibleLetters[

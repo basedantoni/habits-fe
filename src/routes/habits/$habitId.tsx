@@ -12,8 +12,8 @@ import { formatRFC3339, getYear, subYears } from "date-fns";
 import { useWindowSize } from "@uidotdev/usehooks";
 import { z } from "zod";
 import { useTheme } from "@/components/theme-provider";
-import DeleteHabitButton from "@/components/delete-habit-button";
-import CreateContributionButton from "@/components/create-contribution-button";
+import DeleteHabitButton from "@/components/habits/delete-habit-button";
+import CreateContributionButton from "@/components/contributions/create-contribution-button";
 import { NotFound } from "@/components/not-found";
 
 const contributionSearchSchema = z.object({
