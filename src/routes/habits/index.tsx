@@ -37,7 +37,7 @@ function Habits() {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="w-full py-2 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="w-full pt-16 pb-2 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {query.data?.map((habit: Habit) => (
           <HabitCard key={`habit_${habit.id}`} {...habit} />
         ))}
