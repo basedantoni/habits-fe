@@ -15,6 +15,11 @@ import { useTheme } from "@/components/theme-provider";
 import DeleteHabitButton from "@/components/habits/delete-habit-button";
 import CreateContributionButton from "@/components/contributions/create-contribution-button";
 import { NotFound } from "@/components/not-found";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 
 const contributionSearchSchema = z.object({
   year: z
@@ -118,10 +123,19 @@ function Habit() {
 
   return (
     <div className="flex flex-col sm:items-center gap-6">
-      <div className="flex gap-4">
-        <h1 className="text-2xl font-bold">{habit.title}</h1>
-        <DeleteHabitButton id={habitId} />
-        <CreateContributionButton habitId={habitId} />
+      <div className="flex flex-col gap-4">
+        <HoverCard>
+          <HoverCardTrigger>
+            <h1 className="max-w-64 text-2xl font-bold text-nowrap text-ellipsis overflow-hidden">
+              {habit.title}
+            </h1>
+          </HoverCardTrigger>
+          <HoverCardContent align="start">{habit.title}</HoverCardContent>
+        </HoverCard>
+        <div className="flex gap-2">
+          <CreateContributionButton habitId={habitId} />
+          <DeleteHabitButton id={habitId} />
+        </div>
       </div>
       <div className="flex flex-col lg:flex-row gap-4">
         <ActivityCalendar
