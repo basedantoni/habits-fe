@@ -81,7 +81,7 @@ function Index() {
       <div className="flex flex-col">
         {antFlicker.map(({ word, opacity }, index) => (
           <span
-            className="text-6xl font-semibold"
+            className="text-6xl font-semibold 2xl:text-8xl"
             key={index}
             style={{ opacity }}
           >
@@ -90,7 +90,7 @@ function Index() {
         ))}
         {flicker.map(({ word, opacity }, index) => (
           <span
-            className="text-6xl font-semibold"
+            className="text-6xl font-semibold 2xl:text-8xl"
             key={index}
             style={{ opacity }}
           >
@@ -100,13 +100,13 @@ function Index() {
       </div>
       <Link
         to="/habits"
-        className="flex gap-1 items-center text-sm hover:underline"
+        className="flex gap-1 items-center text-sm hover:underline 2xl:text-lg"
       >
         {habitsLinkScambled}
         <div className="bg-zinc-950 dark:bg-white h-1.5 w-1.5 rounded-full animate-pulse"></div>
       </Link>
       <a
-        className="text-sm text-zinc-600 hover:underline"
+        className="text-sm text-zinc-600 hover:underline 2xl:text-lg"
         href="https://www.anthonymercado.xyz/"
       >
         {websiteLinkScambled}

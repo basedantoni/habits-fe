@@ -20,9 +20,9 @@ export const Route = createRootRoute({
         <div className="w-fit m-auto absolute right-4 top-6 sm:left-auto sm:right-4 sm:m-0">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline">
+              <Button variant="outline" size="lg">
                 <p>Menu</p>
-                <span className="sr-only">Toggle theme</span>
+                <span className="sr-only">Menu</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">

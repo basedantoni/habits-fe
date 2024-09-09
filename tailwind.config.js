@@ -14,7 +14,7 @@ module.exports = {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1400px",
+        "2xl": "1920px",
       },
     },
     extend: {
@@ -30,6 +30,10 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+      },
+      screens: {
+        "2xl": "1440px",
+        "3xl": "1536px",
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
