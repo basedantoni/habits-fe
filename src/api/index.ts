@@ -13,6 +13,7 @@ export const client = axios.create({
 client.interceptors.request.use(
   async (config) => {
     const token = await getSessionToken();
+    console.log("TOKEN", token);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
