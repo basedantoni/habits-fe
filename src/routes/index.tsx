@@ -1,12 +1,6 @@
 import useFlickerOpacity from "@/hooks/useFlickerOpacity";
 import useScrambleText from "@/hooks/useScrambleText";
-import {
-  createFileRoute,
-  Link,
-  redirect,
-  useNavigate,
-} from "@tanstack/react-router";
-import { useEffect } from "react";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { z } from "zod";
 
 const indexSearchSchema = z.object({
@@ -31,8 +25,6 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const navigate = useNavigate();
-
   const antFlicker = useFlickerOpacity({
     phrase: "ANT",
     maxFlickerTimes: 6,
@@ -58,23 +50,6 @@ function Index() {
     paused: false,
     once: true,
   });
-
-  useEffect(() => {
-    // Extract token from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get("token");
-    const redirect = urlParams.get("redirect") || "/";
-
-    if (token) {
-      // Store token in local storage
-      localStorage.setItem("token", token);
-
-      // Optionally, remove the token from the URL
-      window.history.replaceState({}, document.title, window.location.pathname);
-      // Redirect to the original destination
-      navigate({ to: redirect });
-    }
-  }, [navigate]);
 
   return (
     <div className="flex-grow flex flex-col h-full justify-between">

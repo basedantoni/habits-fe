@@ -31,7 +31,7 @@ const contributionSearchSchema = z.object({
 
 // type ContributionSearch = z.infer<typeof contributionSearchSchema>;
 
-export const Route = createFileRoute("/habits/$habitId")({
+export const Route = createFileRoute("/_unauthenticated/habits/$habitId")({
   validateSearch: contributionSearchSchema,
   loader: ({
     context,

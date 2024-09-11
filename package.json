@@ -12,6 +12,8 @@
     "watch-routes": "tsr watch"
   },
   "dependencies": {
+    "@clerk/clerk-react": "^5.7.0",
+    "@clerk/elements": "^0.14.6",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^6.0.0",

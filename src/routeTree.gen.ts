@@ -11,38 +11,42 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as UnauthenticatedImport } from './routes/_unauthenticated'
 import { Route as IndexImport } from './routes/index'
-import { Route as SettingsIndexImport } from './routes/settings/index'
-import { Route as LoginIndexImport } from './routes/login/index'
-import { Route as HabitsIndexImport } from './routes/habits/index'
-import { Route as HabitsHabitIdImport } from './routes/habits/$habitId'
+import { Route as UnauthenticatedSettingsIndexImport } from './routes/_unauthenticated/settings/index'
+import { Route as UnauthenticatedHabitsIndexImport } from './routes/_unauthenticated/habits/index'
+import { Route as UnauthenticatedHabitsHabitIdImport } from './routes/_unauthenticated/habits/$habitId'
 
 // Create/Update Routes
+
+const UnauthenticatedRoute = UnauthenticatedImport.update({
+  id: '/_unauthenticated',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any)
 
-const SettingsIndexRoute = SettingsIndexImport.update({
-  path: '/settings/',
-  getParentRoute: () => rootRoute,
-} as any)
+const UnauthenticatedSettingsIndexRoute =
+  UnauthenticatedSettingsIndexImport.update({
+    path: '/settings/',
+    getParentRoute: () => UnauthenticatedRoute,
+  } as any)
 
-const LoginIndexRoute = LoginIndexImport.update({
-  path: '/login/',
-  getParentRoute: () => rootRoute,
-} as any)
+const UnauthenticatedHabitsIndexRoute = UnauthenticatedHabitsIndexImport.update(
+  {
+    path: '/habits/',
+    getParentRoute: () => UnauthenticatedRoute,
+  } as any,
+)
 
-const HabitsIndexRoute = HabitsIndexImport.update({
-  path: '/habits/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const HabitsHabitIdRoute = HabitsHabitIdImport.update({
-  path: '/habits/$habitId',
-  getParentRoute: () => rootRoute,
-} as any)
+const UnauthenticatedHabitsHabitIdRoute =
+  UnauthenticatedHabitsHabitIdImport.update({
+    path: '/habits/$habitId',
+    getParentRoute: () => UnauthenticatedRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -55,33 +59,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/habits/$habitId': {
-      id: '/habits/$habitId'
+    '/_unauthenticated': {
+      id: '/_unauthenticated'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof UnauthenticatedImport
+      parentRoute: typeof rootRoute
+    }
+    '/_unauthenticated/habits/$habitId': {
+      id: '/_unauthenticated/habits/$habitId'
       path: '/habits/$habitId'
       fullPath: '/habits/$habitId'
-      preLoaderRoute: typeof HabitsHabitIdImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof UnauthenticatedHabitsHabitIdImport
+      parentRoute: typeof UnauthenticatedImport
     }
-    '/habits/': {
-      id: '/habits/'
+    '/_unauthenticated/habits/': {
+      id: '/_unauthenticated/habits/'
       path: '/habits'
       fullPath: '/habits'
-      preLoaderRoute: typeof HabitsIndexImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof UnauthenticatedHabitsIndexImport
+      parentRoute: typeof UnauthenticatedImport
     }
-    '/login/': {
-      id: '/login/'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/settings/': {
-      id: '/settings/'
+    '/_unauthenticated/settings/': {
+      id: '/_unauthenticated/settings/'
       path: '/settings'
       fullPath: '/settings'
-      preLoaderRoute: typeof SettingsIndexImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof UnauthenticatedSettingsIndexImport
+      parentRoute: typeof UnauthenticatedImport
     }
   }
 }
@@ -90,10 +94,11 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
-  HabitsHabitIdRoute,
-  HabitsIndexRoute,
-  LoginIndexRoute,
-  SettingsIndexRoute,
+  UnauthenticatedRoute: UnauthenticatedRoute.addChildren({
+    UnauthenticatedHabitsHabitIdRoute,
+    UnauthenticatedHabitsIndexRoute,
+    UnauthenticatedSettingsIndexRoute,
+  }),
 })
 
 /* prettier-ignore-end */
@@ -105,26 +110,31 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/habits/$habitId",
-        "/habits/",
-        "/login/",
-        "/settings/"
+        "/_unauthenticated"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/habits/$habitId": {
-      "filePath": "habits/$habitId.tsx"
+    "/_unauthenticated": {
+      "filePath": "_unauthenticated.tsx",
+      "children": [
+        "/_unauthenticated/habits/$habitId",
+        "/_unauthenticated/habits/",
+        "/_unauthenticated/settings/"
+      ]
     },
-    "/habits/": {
-      "filePath": "habits/index.tsx"
+    "/_unauthenticated/habits/$habitId": {
+      "filePath": "_unauthenticated/habits/$habitId.tsx",
+      "parent": "/_unauthenticated"
     },
-    "/login/": {
-      "filePath": "login/index.tsx"
+    "/_unauthenticated/habits/": {
+      "filePath": "_unauthenticated/habits/index.tsx",
+      "parent": "/_unauthenticated"
     },
-    "/settings/": {
-      "filePath": "settings/index.tsx"
+    "/_unauthenticated/settings/": {
+      "filePath": "_unauthenticated/settings/index.tsx",
+      "parent": "/_unauthenticated"
     }
   }
 }

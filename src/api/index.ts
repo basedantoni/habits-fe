@@ -1,5 +1,6 @@
 import { notFound } from "@tanstack/react-router";
 import axios, { AxiosResponse } from "axios";
+import { getSessionToken } from "@/lib/auth";
 
 export const client = axios.create({
   baseURL: `${import.meta.env.VITE_API_ENDPOINT}`,
@@ -10,8 +11,8 @@ export const client = axios.create({
 
 // Add a request interceptor to set the Authorization header dynamically
 client.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("token");
+  async (config) => {
+    const token = await getSessionToken();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

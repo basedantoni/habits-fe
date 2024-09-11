@@ -1,23 +1,12 @@
 import { indexHabits } from "@/api/habits";
 import CreateHabitButton from "@/components/habits/create-habit-button";
 import HabitCard from "@/components/habits/habit-card";
-import { isAuthenticated } from "@/lib/auth";
 import { Habit } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/habits/")({
+export const Route = createFileRoute("/_unauthenticated/habits/")({
   beforeLoad: async ({ location }) => {
-    // redirect unauthenticated users
-    if (!isAuthenticated()) {
-      throw redirect({
-        to: "/login",
-        search: {
-          redirect: location.href,
-        },
-      });
-    }
-
     // set theme
     if (!localStorage.getItem("vite-ui-theme")) {
       throw redirect({
