@@ -10,12 +10,12 @@ export const Route = createFileRoute("/_unauthenticated")({
       </SignedIn>
       <div className="flex flex-col items-center">
         <SignedOut>
-          <h1 className="text-4xl tracking-tight mb-4">
+          <h1 className="mt-16 text-center text-4xl tracking-tight mb-4">
             Start Tracking Habits
           </h1>
-          <Button>
-            <SignInButton />
-          </Button>
+          <SignInButton mode="modal">
+            <Button>Sign in</Button>
+          </SignInButton>
         </SignedOut>
       </div>
     </>

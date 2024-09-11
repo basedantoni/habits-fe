@@ -77,7 +77,10 @@ function Habit() {
   const contributionMap = new Map<string, Activity>();
 
   contributions.forEach((c: Contribution) => {
-    const date = c.createdAt.split("T")[0];
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const date = new Date(c.createdAt).toLocaleDateString("en-CA", {
+      timeZone,
+    }); // Convert to local date in ISO format (YYYY-MM-DD)
     const activity = contributionMap.get(date);
     if (activity) {
       activity.count += c.timeSpent;
@@ -106,8 +109,8 @@ function Habit() {
   ];
 
   const explicitTheme: ThemeInput = {
-    light: ["#F0F0F0", "#DCACE8", "#A24CCD", "#8013BD"],
-    dark: ["#4D4D4D", "#EFC1FA", "#D174FF", "#B839FF"],
+    light: ["#F0F0F0", "#ffecc6", "#ffc766", "#ffa420"],
+    dark: ["#4D4D4D", "#ea8f53", "#e46d2b", "#d55421"],
   };
 
   const initYearArray = (startYear: number) => {
